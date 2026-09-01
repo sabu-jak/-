@@ -1,18 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6h2sn1mwn5f3"]
+[gd_scene load_steps=6 format=3 uid="uid://c6h2sn1mwn5f3"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_dj9vu"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hand_ui.tscn" id="2_hand"]
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="3_spawner"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 16.0
 
 [node name="Main" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_dj9vu")
 
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("3_spawner")
+
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(640, 360)
+script = ExtResource("1_player")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(2, 2)
+[node name="ColorRect" type="ColorRect" parent="Player"]
+anchors_rect_changed = true
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.2, 0.4, 0.8, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_1")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HandUI" parent="UI" instance=ExtResource("2_hand")]
