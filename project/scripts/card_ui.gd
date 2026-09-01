@@ -30,8 +30,8 @@ func _on_gui_input(event: InputEvent):
 func _process(delta):
 	if is_dragging:
 		global_position = get_global_mouse_position() - drag_offset
-		get_tree().root.get_child(0).modulate.v = 0.5  # Time dilation visual
 
 func on_card_released():
-	var game_manager = get_tree().root.get_child(0).get_node("GameManager")
+	var root = get_tree().root.get_child(0)
+	var game_manager = root.get_node("GameManager")
 	game_manager.card_played(card)
